@@ -44,8 +44,7 @@ The raw dataset contains an additional continuous feature named `stab`. This fea
 ## 🏗️ Orange Workflow Architecture
 
 Below is the complete macro-architecture of the visual pipeline designed for this research:
-
-*[Buraya Tüm Orange Ekranının (Genel Akışın) Görüntüsünü Sürükle]*
+<img width="588" height="559" alt="Ekran görüntüsü 2026-05-02 232156" src="https://github.com/user-attachments/assets/ca044f2c-8960-4d40-81ee-08b50b2e5fc2" />
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
@@ -57,14 +56,21 @@ Before subjecting the data to complex algorithms, a foundational statistical and
 ### Statistical Baselines
 Using the `Data Table` and `Column Statistics` widgets, we confirmed the integrity of the dataset. There were **zero missing values**, negating the need for imputation techniques.
 
-*[Buraya Column Statistics / Data Table Ekran Görüntüsünü Sürükle]*
+<img width="992" height="650" alt="Ekran görüntüsü 2026-05-02 224057" src="https://github.com/user-attachments/assets/b765c148-20c4-48ce-89dd-5d6642aa602f" />
+
 
 ### Visual Feature Separability
 To understand the complexity of the classification task, 2D projections of the multi-dimensional space were analyzed:
 - **Scatter Plots:** By plotting various feature pairs (e.g., `tau1` vs. `p1`) and color-coding them by the `stabf` target, it became evident that the *stable* and *unstable* classes heavily overlap. This visual proof confirms that simple linear classifiers would fail, necessitating non-linear models.
 - **Distributions:** Histograms were utilized to observe the density and spread of individual features across the two grid states.
 
-*[Buraya 2 Adet Scatter Plot ve 2 Adet Histogram/Distribution Ekran Görüntüsünü Sürükle]*
+<img width="992" height="650" alt="Ekran görüntüsü 2026-05-02 224057" src="https://github.com/user-attachments/assets/b7d511f3-ee7b-4f76-a89c-9f055c991ff1" />
+
+<img width="1280" height="745" alt="Ekran görüntüsü 2026-05-02 224340" src="https://github.com/user-attachments/assets/ca821eb0-9e51-46ae-8809-4a9c1e3cc8df" />
+<img width="1267" height="517" alt="Ekran görüntüsü 2026-05-02 224122" src="https://github.com/user-attachments/assets/e3c00280-668f-4038-a4a6-d1791011b74d" />
+
+<img width="1267" height="510" alt="Ekran görüntüsü 2026-05-02 224112" src="https://github.com/user-attachments/assets/0144d461-58a3-4db1-a4d1-f8327f7804ab" />
+
 
 ---
 
@@ -80,14 +86,18 @@ The K-Means algorithm was deployed with an automated optimization parameter to t
 - **Finding:** The algorithm dynamically calculated the highest **Silhouette Score (0.105)** at exactly **$k=2$**. 
 - **Conclusion:** Even without knowing the labels, the algorithm organically deduced that the data is best represented in two distinct clusters, perfectly mirroring our ground truth (*stable* and *unstable*).
 
-*[Buraya K-Means Silhouette Skorlarının Olduğu Ekran Görüntüsünü Sürükle]*
+<img width="553" height="400" alt="Ekran görüntüsü 2026-05-02 225216" src="https://github.com/user-attachments/assets/772f272f-8721-4f5e-9d7c-d6d96569f4c3" />
+
 
 ### 2. Hierarchical Clustering (Dendrogram Analysis)
 A Euclidean distance matrix was generated, followed by Hierarchical Clustering using Ward's linkage. By manipulating the cut-off line (Top N pruning), we observed the hierarchical granularity of the grid events:
 - **Top N = 2:** Shows the macro-division between the primary stability states.
 - **Top N = 4 & Top N = 7:** Reveals how the primary clusters break down into micro-clusters as the distance threshold is lowered, indicating varying degrees of instability or operational variances.
 
-*[Buraya Dendrogram'ın 2, 4 ve 7 Küme İçin Alınmış 3 Farklı Ekran Görüntüsünü Sürükle]*
+<img width="1919" height="1012" alt="Ekran görüntüsü 2026-05-02 225924" src="https://github.com/user-attachments/assets/0f3d24f8-4051-4e36-b30f-956121a33c96" />
+<img width="1919" height="1016" alt="Ekran görüntüsü 2026-05-02 225952" src="https://github.com/user-attachments/assets/50109020-1526-4ac0-bc8b-2e13e8a365a3" />
+<img width="1919" height="1015" alt="Ekran görüntüsü 2026-05-02 230009" src="https://github.com/user-attachments/assets/453123a0-b7d6-4920-b139-dbe68f9f6d17" />
+
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
@@ -105,7 +115,9 @@ A distance-based lazy learner. We experimented with the smoothness of the decisi
 - **Experiment 2:** $k = 7$
 - **Experiment 3:** $k = 15$
 
-*[Buraya kNN İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+<img width="967" height="636" alt="Ekran görüntüsü 2026-05-02 231506" src="https://github.com/user-attachments/assets/fe58464e-f8d2-4dd6-af45-2b867ba3503a" />
+<img width="969" height="648" alt="Ekran görüntüsü 2026-05-02 231517" src="https://github.com/user-attachments/assets/ad883702-5e42-4156-9449-87a0af90cd34" />
+<img width="966" height="656" alt="Ekran görüntüsü 2026-05-02 231527" src="https://github.com/user-attachments/assets/e80e6e0d-802f-4cf5-ab88-6bdecd3ef14d" />
 
 ### 2. Random Forest
 An ensemble learning method utilized for its resilience against overfitting in complex datasets. We experimented with the depth and width of the forest.
@@ -113,7 +125,11 @@ An ensemble learning method utilized for its resilience against overfitting in c
 - **Experiment 2:** Number of Trees = 50
 - **Experiment 3:** Number of Trees = 100
 
-*[Buraya Random Forest İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+<img width="966" height="656" alt="Ekran görüntüsü 2026-05-02 231527" src="https://github.com/user-attachments/assets/6af17a42-b6a2-45e1-ad5f-a1860075a5af" />
+<img width="971" height="654" alt="Ekran görüntüsü 2026-05-02 231623" src="https://github.com/user-attachments/assets/d03e3097-7d20-4b4c-8215-db9dc5249cd3" />
+<img width="971" height="657" alt="Ekran görüntüsü 2026-05-02 231632" src="https://github.com/user-attachments/assets/68f9370f-0f1a-4b05-9adf-e584345c6271" />
+
+
 
 ### 3. Artificial Neural Networks (ANN)
 A Multi-layer Perceptron (MLP) capable of mapping highly non-linear functions. We experimented with the network's architectural depth.
@@ -121,7 +137,10 @@ A Multi-layer Perceptron (MLP) capable of mapping highly non-linear functions. W
 - **Experiment 2:** 2 Hidden Layers (100, 50 neurons)
 - **Experiment 3:** 2 Hidden Layers (200, 100 neurons)
 
-*[Buraya Neural Network İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+<img width="968" height="657" alt="Ekran görüntüsü 2026-05-02 231724" src="https://github.com/user-attachments/assets/a346ad72-11e5-47f1-88bf-737676315855" />
+
+<img width="969" height="660" alt="Ekran görüntüsü 2026-05-02 231756" src="https://github.com/user-attachments/assets/4085663b-ecca-440b-8111-87b339145d06" />
+<img width="975" height="651" alt="Ekran görüntüsü 2026-05-02 231821" src="https://github.com/user-attachments/assets/34b9dd01-ac9c-468e-ada4-813635b5e7e8" />
 
 ---
 
@@ -138,7 +157,7 @@ The models were evaluated using a comprehensive suite of metrics including **Cla
 ### Confusion Matrix Analysis
 The evaluation via the `Confusion Matrix` widget revealed that the **Neural Network** not only had the highest overall accuracy but also exceptional precision in minimizing False Positives. In the context of electrical grids, incorrectly classifying an *unstable* state as *stable* could lead to catastrophic power failures, making the Neural Network's high recall rate critical for deployment.
 
-*[Buraya Sonuçları Gösteren Test and Score ve Confusion Matrix Ekran Görüntülerini Sürükle]*
+<img width="1919" height="1019" alt="Ekran görüntüsü 2026-05-03 190311" src="https://github.com/user-attachments/assets/7ae0824c-d5d1-4943-88fb-fb2d805796f2" />
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
