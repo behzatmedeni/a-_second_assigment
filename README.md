@@ -1,93 +1,133 @@
 <div align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHZhZWEyMThmZmV0YnU0a3I3ZnMzNWd1ZGw4azQ4d3EzZWNpZTJ6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L5oVD5XQYQn2Kj1kPj/giphy.gif" alt="AI and Machine Learning Animation" width="100%"/>
+  <img src="https://media.giphy.com/media/1n7dpJ1vQvoR1w0xGj/giphy.gif" alt="Neural Network Animation" width="100%"/>
 
-  <h1>⚡ Electrical Grid Stability Prediction Pipeline</h1>
+  <h1>⚡ Smart Electrical Grid Stability Prediction Pipeline</h1>
   
-  **An End-to-End Machine Learning Workflow Developed with Orange Data Mining**
+  **An Exhaustive End-to-End Machine Learning Workflow Built with Orange Data Mining**
 
   <p align="center">
     <img src="https://img.shields.io/badge/Machine%20Learning-FF6F00?style=for-the-badge&logo=scikitlearn&logoColor=white" alt="ML Badge"/>
     <img src="https://img.shields.io/badge/Orange%20Data%20Mining-FFA500?style=for-the-badge&logo=appveyor&logoColor=white" alt="Orange Badge"/>
     <img src="https://img.shields.io/badge/Data%20Science-20232A?style=for-the-badge&logo=python&logoColor=white" alt="Data Science"/>
-    <img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge" alt="Status"/>
+    <img src="https://img.shields.io/badge/Clustering-Unsupervised-blue?style=for-the-badge" alt="Unsupervised"/>
+    <img src="https://img.shields.io/badge/Classification-Supervised-green?style=for-the-badge" alt="Supervised"/>
   </p>
 </div>
 
 <br/>
 
-## 📖 Project Overview
-This repository showcases a comprehensive, visual machine learning pipeline aimed at predicting the stability of an electrical power grid. By leveraging both **Supervised Classification** and **Unsupervised Clustering** techniques, this project identifies critical patterns in grid node interactions and evaluates state-of-the-art predictive models.
+## 📖 Executive Summary
+This repository contains a highly detailed and visually constructed machine learning pipeline designed to predict the stability of an electrical power grid. The project encompasses the full data science lifecycle: **Data Ingestion, Pre-processing, Exploratory Data Analysis (EDA), Unsupervised Clustering**, and **Supervised Classification with extensive hyperparameter tuning**. 
 
-The entire workflow—from data pre-processing and Exploratory Data Analysis (EDA) to hyperparameter optimization—was constructed without writing raw code, utilizing the node-based architecture of **Orange Data Mining**.
-
----
+The entire architecture was developed utilizing the node-based visual programming environment of **Orange Data Mining**, allowing for an intuitive yet mathematically rigorous approach to model evaluation.
 
 <div align="center">
-  <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" alt="Data Analytics" width="400"/>
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
 </div>
 
-## 📊 Dataset Specifications
-The dataset utilized is the **Electrical Grid Stability Simulated Dataset** from the UCI Machine Learning Repository[cite: 1].
+## 🗄️ Dataset Specifications
+The project utilizes the **Electrical Grid Stability Simulated Dataset** from the UCI Machine Learning Repository.
 
-- **Total Instances:** 10,000 grid stability events[cite: 1].
-- **Features:** 12 continuous predictive attributes representing response times (`tau1`-`tau4`), power balances (`p1`-`p4`), and price elasticities (`g1`-`g4`)[cite: 1].
-- **Target Variable:** `stabf` (Categorical variable: *stable* or *unstable*)[cite: 1].
+- **Dataset Size:** 10,000 recorded instances.
+- **Independent Variables (Features):** 12 continuous numerical attributes.
+  - `tau1` to `tau4`: Reaction times of the grid nodes.
+  - `p1` to `p4`: Nominal power produced/consumed.
+  - `g1` to `g4`: Coefficient (price elasticity) values.
+- **Target Variable:** `stabf` (Categorical: **stable** or **unstable**).
 
-### ⚠️ Critical Pre-processing: Preventing Data Leakage
-The original dataset file (`Data_for_UCI_named.csv`) contains a continuous variable named `stab`, which is the direct mathematical formula output determining the categorical target `stabf`[cite: 1]. 
-> **Engineering Decision:** To prevent severe **Data Leakage** and ensure the models learn the actual underlying distributions rather than cheating via a direct identifier, the `stab` column was explicitly assigned the *Skip/Meta* role during data ingestion[cite: 1]. The models were trained strictly on the 12 independent grid features[cite: 1].
+### 🚨 Critical Engineering Step: Preventing Data Leakage
+The raw dataset contains an additional continuous feature named `stab`. This feature represents the direct mathematical calculation used to derive the target label `stabf`. Including `stab` in the feature set would result in severe **Data Leakage**, causing the models to achieve 100% accuracy without genuinely learning the grid's operational parameters. 
+> **Resolution:** During the initial data loading phase via the `File` widget, the `stab` column was explicitly assigned the **Skip/Meta** role. All subsequent learning was strictly constrained to the 12 independent operational features.
 
 ---
 
-## ⚙️ Architecture & Workflow
+## 🏗️ Orange Workflow Architecture
 
-### 1. Exploratory Data Analysis (EDA)
-Before model training, a thorough visual inspection of the dataset was conducted to understand feature separability and identify potential outliers:
-- **Distributions:** Histograms revealed overlapping characteristics between the *stable* and *unstable* classes, indicating a highly non-linear classification problem.
-- **Scatter Plots:** Multi-dimensional scatter projections confirmed that linear separation boundaries would be insufficient for this dataset.
+Below is the complete macro-architecture of the visual pipeline designed for this research:
 
-*(Insert your Scatter Plot screenshot here: `![Scatter Plot](link_to_image)`)*
-
-### 2. Unsupervised Learning (Clustering)
-We assumed the dataset was unlabeled and applied clustering algorithms to discover organic groupings.
+*[Buraya Tüm Orange Ekranının (Genel Akışın) Görüntüsünü Sürükle]*
 
 <div align="center">
-  <img src="https://media.giphy.com/media/26tn33aiTi1jIGsnu/giphy.gif" alt="Clustering Animation" width="350"/>
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
 </div>
 
-- **K-Means Clustering:** 
-  - Optimized the $k$ value from 2 to 6.
-  - The maximum **Silhouette Score (0.105)** was achieved precisely at **$k=2$**. This mathematically validated our dataset's natural underlying structure, as we have exactly two ground-truth classes.
-- **Hierarchical Clustering:** 
-  - Computed Euclidean distances and generated a Dendrogram using Ward's linkage.
-  - Applied pruning and varying cut-off lines to observe the hierarchical breakdown of grid events into 2, 4, and 7 sub-clusters.
+## 🔍 PART I: Exploratory Data Analysis (EDA) & Pre-processing
+Before subjecting the data to complex algorithms, a foundational statistical and visual inspection was performed.
 
-*(Insert your Dendrogram screenshot here: `![Dendrogram](link_to_image)`)*
+### Statistical Baselines
+Using the `Data Table` and `Column Statistics` widgets, we confirmed the integrity of the dataset. There were **zero missing values**, negating the need for imputation techniques.
 
----
+*[Buraya Column Statistics / Data Table Ekran Görüntüsünü Sürükle]*
 
-### 3. Supervised Learning (Classification)
-To predict grid stability, the dataset was split using an **80% Training / 20% Test** ratio via a Stratified Data Sampler. All models were strictly evaluated on the unseen 20% test data to simulate real-world inference.
+### Visual Feature Separability
+To understand the complexity of the classification task, 2D projections of the multi-dimensional space were analyzed:
+- **Scatter Plots:** By plotting various feature pairs (e.g., `tau1` vs. `p1`) and color-coding them by the `stabf` target, it became evident that the *stable* and *unstable* classes heavily overlap. This visual proof confirms that simple linear classifiers would fail, necessitating non-linear models.
+- **Distributions:** Histograms were utilized to observe the density and spread of individual features across the two grid states.
 
-We trained and fine-tuned three distinct algorithms:
-
-#### 🧠 Artificial Neural Networks (ANN)
-- **Architecture:** Multi-layer Perceptron (MLP).
-- **Hyperparameter Experiments:** Tested varying depth and complexity by altering the Hidden Layers (e.g., 50 neurons vs. [100, 50] vs. [200, 100]).
-
-#### 🌲 Random Forest
-- **Architecture:** Ensemble learning method utilizing decision trees.
-- **Hyperparameter Experiments:** Optimized the Number of Trees (10 vs. 50 vs. 100) to balance bias and variance.
-
-#### 📍 K-Nearest Neighbors (kNN)
-- **Architecture:** Distance-based lazy learning.
-- **Hyperparameter Experiments:** Adjusted the $k$ parameter (k=3, 5, 15) to find the optimal decision boundary smoothness.
+*[Buraya 2 Adet Scatter Plot ve 2 Adet Histogram/Distribution Ekran Görüntüsünü Sürükle]*
 
 ---
 
-## 🏆 Model Evaluation & Results
+## 🧩 PART II: Unsupervised Learning (Clustering)
+We simulated a scenario where the target labels were unknown to observe if the algorithms could naturally discover the grid's stability states.
 
-The models were evaluated comprehensively using **Classification Accuracy (CA)**, Area Under Curve (AUC), F1-Score, Precision, and Recall.
+<div align="center">
+  <img src="https://media.giphy.com/media/l41lOemX4rGMBB1W8/giphy.gif" alt="Clustering Concept" width="400"/>
+</div>
+
+### 1. K-Means Clustering & Silhouette Optimization
+The K-Means algorithm was deployed with an automated optimization parameter to test $k$ values ranging from 2 to 6.
+- **Finding:** The algorithm dynamically calculated the highest **Silhouette Score (0.105)** at exactly **$k=2$**. 
+- **Conclusion:** Even without knowing the labels, the algorithm organically deduced that the data is best represented in two distinct clusters, perfectly mirroring our ground truth (*stable* and *unstable*).
+
+*[Buraya K-Means Silhouette Skorlarının Olduğu Ekran Görüntüsünü Sürükle]*
+
+### 2. Hierarchical Clustering (Dendrogram Analysis)
+A Euclidean distance matrix was generated, followed by Hierarchical Clustering using Ward's linkage. By manipulating the cut-off line (Top N pruning), we observed the hierarchical granularity of the grid events:
+- **Top N = 2:** Shows the macro-division between the primary stability states.
+- **Top N = 4 & Top N = 7:** Reveals how the primary clusters break down into micro-clusters as the distance threshold is lowered, indicating varying degrees of instability or operational variances.
+
+*[Buraya Dendrogram'ın 2, 4 ve 7 Küme İçin Alınmış 3 Farklı Ekran Görüntüsünü Sürükle]*
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
+</div>
+
+## 🚀 PART III: Supervised Learning & Hyperparameter Tuning
+
+To create robust predictive models, the dataset was piped through a **Data Sampler** and split using an **80% Training / 20% Test** ratio (Stratified sampling). To prevent overfitting, models were evaluated *strictly* on the isolated 20% test data (`Test on test data` mode in the `Test and Score` widget).
+
+Three machine learning models were deployed, and rigorous hyperparameter experiments were conducted for each:
+
+### 1. K-Nearest Neighbors (kNN)
+A distance-based lazy learner. We experimented with the smoothness of the decision boundary by altering the number of neighbors ($k$).
+- **Experiment 1:** $k = 3$
+- **Experiment 2:** $k = 7$
+- **Experiment 3:** $k = 15$
+
+*[Buraya kNN İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+
+### 2. Random Forest
+An ensemble learning method utilized for its resilience against overfitting in complex datasets. We experimented with the depth and width of the forest.
+- **Experiment 1:** Number of Trees = 10
+- **Experiment 2:** Number of Trees = 50
+- **Experiment 3:** Number of Trees = 100
+
+*[Buraya Random Forest İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+
+### 3. Artificial Neural Networks (ANN)
+A Multi-layer Perceptron (MLP) capable of mapping highly non-linear functions. We experimented with the network's architectural depth.
+- **Experiment 1:** 1 Hidden Layer (50 neurons)
+- **Experiment 2:** 2 Hidden Layers (100, 50 neurons)
+- **Experiment 3:** 2 Hidden Layers (200, 100 neurons)
+
+*[Buraya Neural Network İçin Yaptığın Deneylerin Test and Score Ekran Görüntülerini Sürükle]*
+
+---
+
+## 🏆 Final Model Evaluation & Conclusion
+
+The models were evaluated using a comprehensive suite of metrics including **Classification Accuracy (CA)**, Area Under ROC Curve (AUC), F1-Score, Precision, and Recall.
 
 | Rank | Algorithm | Classification Accuracy (CA) | Best Hyperparameter Configuration |
 | :---: | :--- | :---: | :--- |
@@ -96,21 +136,23 @@ The models were evaluated comprehensively using **Classification Accuracy (CA)**
 | 🥉 | **kNN** | ~ 77.8% | k = 5 Neighbors |
 
 ### Confusion Matrix Analysis
-The Neural Network demonstrated exceptional precision in identifying *unstable* grid events, minimizing False Positives, which is critical for real-world electrical infrastructure security and proactive failure mitigation.
+The evaluation via the `Confusion Matrix` widget revealed that the **Neural Network** not only had the highest overall accuracy but also exceptional precision in minimizing False Positives. In the context of electrical grids, incorrectly classifying an *unstable* state as *stable* could lead to catastrophic power failures, making the Neural Network's high recall rate critical for deployment.
 
-*(Insert your Test & Score / Confusion Matrix screenshot here: `![Results](link_to_image)`)*
-
----
-
-## 🚀 Future Work & Scalability
-While this pipeline was built locally, future iterations of this project could involve:
-- **Cloud Deployment:** Exporting the trained Neural Network model into a Python environment (`scikit-learn` or `TensorFlow`) and deploying it as a microservice on **AWS (Amazon Web Services)** using AWS Lambda and API Gateway.
-- **Real-time Monitoring:** Integrating the prediction endpoint with a distributed Go-based backend (similar to ASFDN structures) to monitor live smart-grid telemetry data.
-
----
+*[Buraya Sonuçları Gösteren Test and Score ve Confusion Matrix Ekran Görüntülerini Sürükle]*
 
 <div align="center">
-  <i>"Predicting the unpredictable to keep the lights on."</i>
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
+</div>
+
+## 🔮 Future Work & Scalability
+The methodology established in this visual pipeline lays the groundwork for programmatic implementation. Future iterations of this project will focus on:
+- **Backend Integration:** Translating the optimal Neural Network architecture into Python (`TensorFlow`/`PyTorch`) and integrating it with a distributed high-performance **Go (Golang)** backend.
+- **Cloud Deployment:** Utilizing **Amazon Web Services (AWS)** to host the predictive model as a scalable API, enabling real-time telemetry analysis and automated infrastructure protection for smart grids.
+
+<br/>
+
+<div align="center">
+  <img src="https://media.giphy.com/media/26xBEamXwaMSUbV72/giphy.gif" alt="End Animation" width="200"/>
   <br><br>
   <b>Developed by Behzat Medeni</b><br>
   <i>Computer Engineering Student (Technology Faculty) | Exchange Student at Riga Technical University (RTU)</i>
